@@ -8,6 +8,13 @@ class UsuariosController extends ResourceController{
   final ManagedContext context;
   final AuthServer authServer;
 
+  @Operation.get()
+  Future<Response> getAllUsuarios() async {
+    final usuariosQuery = Query<Usuarios>(context);
+    final usuarios = await usuariosQuery.fetch();
+    return Response.ok(usuarios);
+  }
+
   @Operation.post()
   Future<Response> createUser(@Bind.body() Usuarios user) async {
     if (user.username == null || user.password == null) {

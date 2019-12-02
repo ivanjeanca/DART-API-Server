@@ -12,8 +12,8 @@ class AreasClienteController extends ResourceController{
     return Response.ok(areascliente);
   }
 
-  @Operation.get('idareascliente')
-  Future<Response> getAreaClienteByID(@Bind.path('idareascliente') int id) async{
+  @Operation.get('idareacliente')
+  Future<Response> getAreaClienteByID(@Bind.path('idareacliente') int id) async{
     final areaclienteQuery = Query<AreasCliente>(context)..where((a)=>a.id_area_cliente).equalTo(id);
     final areacliente = await areaclienteQuery.fetch();
     if(areacliente == null){
@@ -24,7 +24,7 @@ class AreasClienteController extends ResourceController{
 
   @Operation.post()
   Future<Response> insAreaCliente() async{
-    final areacliente = AreasCliente()..read(await request.body.decode(), ignore: ["idAreaCliente"] );
+    final areacliente = AreasCliente()..read(await request.body.decode(), ignore: ["idareacliente"] );
     final query = Query<AreasCliente>(context)..values = areacliente;
     final insertedAreaCliente = await query.insert();
     return Response.ok(insertedAreaCliente);
