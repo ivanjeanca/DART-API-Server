@@ -41,6 +41,7 @@ class ServerChannel extends ApplicationChannel {
     router.route("/productosareascliente[/:idprodareacliente]").link( () => ProductosAreasClienteController(context) );
     router.route("/detallepedido[/:iddetped]").link( () => DetallePedidoController(context) );
     router.route("/empleados[/:idempleado]").link( () => EmpleadosController(context) );
+    //router.route("/usuarios").link( () => UsuariosController(context,authServer) );
     router.route("/usuarios[/:user/:pwd]").link( () => UsuariosController(context,authServer) );
     
     return router;

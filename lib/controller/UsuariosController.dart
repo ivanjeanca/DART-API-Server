@@ -28,12 +28,19 @@ class UsuariosController extends ResourceController{
     return Response.ok(await Query(context, values: user).insert());
   }
 
+/*
+  @Operation.get()
+  Future<Response> login(@Bind.body() Usuarios user) async {
+    var token = await authServer.authenticate(user.username, user.password, "com.patm.desktop", "");
+    print(token.accessToken.toString());
+    return Response.ok(token.accessToken);
+  }
+*/
   @Operation.get('user','pwd')
   Future<Response> loginUser(@Bind.path('user') String usuario, @Bind.path('pwd') String pwd ) async {
-    final clientID = "com.patm.epp";
+    const clientID = "com.patm.tienda";
     final body = "username=$usuario&password=$pwd&grant_type=password";
     final clientCredentials = Base64Encoder().convert("$clientID:".codeUnits);
-
     final response = await http.post(
       "http://localhost:8888/auth/token",
       headers: {
@@ -42,7 +49,7 @@ class UsuariosController extends ResourceController{
       },
       body: body
     );
-    print(body);
-    return Response.ok(response.body);
+    print(json.decode(response.body)['access_token']);
+    return (response.statusCode == 200) ? Response.ok(response.body) : Response.notFound();
   }
 }
