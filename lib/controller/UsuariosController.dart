@@ -38,6 +38,10 @@ class UsuariosController extends ResourceController{
 */
   @Operation.get('user','pwd')
   Future<Response> loginUser(@Bind.path('user') String usuario, @Bind.path('pwd') String pwd ) async {
+    /*
+      para agregar el clientID, por que si no, no jala el login
+      aqueduct auth add-client --id com.patm.tienda --connect postgres://dart:1@localhost:5432/tienda_dart
+    */
     const clientID = "com.patm.tienda";
     final body = "username=$usuario&password=$pwd&grant_type=password";
     final clientCredentials = Base64Encoder().convert("$clientID:".codeUnits);
