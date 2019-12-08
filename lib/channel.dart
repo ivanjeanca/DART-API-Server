@@ -33,16 +33,15 @@ class ServerChannel extends ApplicationChannel {
     final router = Router();
 
     router.route('/auth/token').link(() => AuthController(authServer));
-    router.route("/productos[/:idproducto]").link( () => ProductosController(context) ); 
-    router.route("/pedidos[/:idpedido]").link( () => PedidosController(context) ); 
-    router.route("/clientes[/:idcliente]").link( () => ClientesController(context) ); 
-    router.route("/areas[/:idarea]").link( () => AreasController(context) );
-    router.route("/areascliente[/:idareacliente]").link( () => AreasClienteController(context) );
-    router.route("/productosareascliente[/:idprodareacliente]").link( () => ProductosAreasClienteController(context) );
-    router.route("/detallepedido[/:iddetped]").link( () => DetallePedidoController(context) );
-    router.route("/empleados[/:idempleado]").link( () => EmpleadosController(context) );
-    //router.route("/usuarios").link( () => UsuariosController(context,authServer) );
-    router.route("/usuarios[/:user/:pwd]").link( () => UsuariosController(context,authServer) );
+    router.route("/productos[/:idproducto]").link(() => ProductosController(context)); 
+    router.route("/pedidos[/:idpedido]").link(() => PedidosController(context)); 
+    router.route("/clientes[/:idcliente]").link(() => ClientesController(context)); 
+    router.route("/areas[/:idarea]").link(() => AreasController(context));
+    router.route("/areascliente[/:idareacliente]").link(() => AreasClienteController(context));
+    router.route("/productosareascliente[/:idprodareacliente]").link(() => ProductosAreasClienteController(context));
+    router.route("/detallepedido[/:iddetped]").link(() => DetallePedidoController(context));
+    router.route("/empleados[/:idempleado]").link(() => EmpleadosController(context));
+    router.route("/usuarios[/:user/:pwd]").link(() => UsuariosController(context, authServer));
     
     return router;
   }

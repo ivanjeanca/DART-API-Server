@@ -20,5 +20,6 @@ class Producto{
   String imagen;
 
   ManagedSet<DetallePedido> detalle;
-  ManagedSet<ProductoAreasCliente> prodareacte;
+  //ManagedSet<ProductoAreasCliente> prodareacte;
+  ProductoAreasCliente prodareacte;
 }

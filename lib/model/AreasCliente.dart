@@ -16,5 +16,6 @@ class Area_Cliente{
   @Relate(#areacte)
   Clientes cliente;
 
-  ManagedSet<ProductoAreasCliente> prodareacte;
+  //ManagedSet<ProductoAreasCliente> prodareacte;
+  ProductoAreasCliente prodareacte;
 }

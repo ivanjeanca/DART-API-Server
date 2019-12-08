@@ -10,5 +10,6 @@ class Area{
   @Column(unique: true)
   String area;
 
-  ManagedSet<AreasCliente> areacte;
+  //ManagedSet<AreasCliente> areacte;
+  AreasCliente areacte;
 }

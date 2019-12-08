@@ -10,16 +10,16 @@ class UsuariosController extends ResourceController{
 
   @Operation.get()
   Future<Response> getAllUsuarios() async {
-    final usuariosQuery = Query<Usuarios>(context);
+    final usuariosQuery = Query<Usuarios>(context)
+      ..join(object: (u) => u.empleado);
     final usuarios = await usuariosQuery.fetch();
     return Response.ok(usuarios);
   }
 
   @Operation.post()
   Future<Response> createUser(@Bind.body() Usuarios user) async {
-    if (user.username == null || user.password == null) {
+    if (user.username == null || user.password == null) 
       return Response.badRequest(body: {'error': 'Usuario y contraseña requeridos.'});
-    }
 
     user
       ..salt = AuthUtility.generateRandomSalt()
@@ -28,14 +28,6 @@ class UsuariosController extends ResourceController{
     return Response.ok(await Query(context, values: user).insert());
   }
 
-/*
-  @Operation.get()
-  Future<Response> login(@Bind.body() Usuarios user) async {
-    var token = await authServer.authenticate(user.username, user.password, "com.patm.desktop", "");
-    print(token.accessToken.toString());
-    return Response.ok(token.accessToken);
-  }
-*/
   @Operation.get('user','pwd')
   Future<Response> loginUser(@Bind.path('user') String usuario, @Bind.path('pwd') String pwd ) async {
     /*

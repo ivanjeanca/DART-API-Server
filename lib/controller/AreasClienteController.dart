@@ -7,7 +7,12 @@ class AreasClienteController extends ResourceController{
   
   @Operation.get()
   Future<Response> getAllAreasCliente() async {
-    final areasclienteQuery = Query<AreasCliente>(context);
+    final areasclienteQuery = Query<AreasCliente>(context)
+      ..join(object: (ac) => ac.area)
+        .returningProperties((a) => [a.area])
+      ..join(object: (ac) => ac.cliente)
+        .returningProperties((c) => [c.nombre]);
+    
     final areascliente = await areasclienteQuery.fetch();
     return Response.ok(areascliente);
   }

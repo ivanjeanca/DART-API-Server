@@ -18,5 +18,6 @@ class Cliente{
   String telefono;
 
   ManagedSet<Pedidos> pedido;
-  ManagedSet<AreasCliente> areacte;
+  //ManagedSet<AreasCliente> areacte;
+  AreasCliente areacte;
 }
