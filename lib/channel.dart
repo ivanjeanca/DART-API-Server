@@ -5,6 +5,7 @@ import 'controller/AreasController.dart';
 import 'controller/ClientesController.dart';
 import 'controller/DetallePedidoController.dart';
 import 'controller/EmpleadosController.dart';
+import 'controller/LoginController.dart';
 import 'controller/PedidosController.dart';
 import 'controller/ProductosAreasClienteController.dart';
 import 'controller/ProductosController.dart';
@@ -41,7 +42,8 @@ class ServerChannel extends ApplicationChannel {
     router.route("/productosareascliente[/:idprodareacliente]").link(() => ProductosAreasClienteController(context));
     router.route("/detallepedido[/:iddetped]").link(() => DetallePedidoController(context));
     router.route("/empleados[/:idempleado]").link(() => EmpleadosController(context));
-    router.route("/usuarios[/:user/:pwd]").link(() => UsuariosController(context, authServer));
+    router.route("/login[/:user/:pwd]").link(() => LoginController(context, authServer));
+    router.route("/usuarios[/:user]").link(() => UsuariosController(context, authServer));
     
     return router;
   }

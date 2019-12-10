@@ -19,7 +19,8 @@ class Producto{
   bool vigente;
   String imagen;
 
-  ManagedSet<DetallePedido> detalle;
+  //ManagedSet<DetallePedido> detalle;
+  DetallePedido detalle;
   //ManagedSet<ProductoAreasCliente> prodareacte;
   ProductoAreasCliente prodareacte;
 }

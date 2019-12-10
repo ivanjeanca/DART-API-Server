@@ -20,4 +20,5 @@ class Empleado {
 
 	ManagedSet<Pedidos> empleado;
 	Usuarios users;
+  //Pedidos empleado;
 }

@@ -1,18 +1,29 @@
 import 'package:server/server.dart';
 import 'package:server/model/DetallePedido.dart';
-import 'package:server/model/Productos.dart';
 
 class DetallePedidoController extends ResourceController{
 
   DetallePedidoController(this.context);
   final ManagedContext context;
   
-  @Operation.get('idpedido')
-  Future<Response> getAllDetallePedido(@Bind.path('idpedido') int id) async {
-    var detpedidosQuery = Query<Productos>(context);
+  @Operation.get()
+  Future<Response> getAllDetallePedido() async {
+    final detpedidosQuery = Query<DetallePedido>(context)
+      ..join(object: (prod) => prod.producto)
+      ..join(object: (pedi) => pedi.pedido)
+        .join(object: (empl) => empl.empleado);
+    
+    final detpedidos = await detpedidosQuery.fetch();
+    return Response.ok(detpedidos);
+  }
 
-    var subquery = detpedidosQuery.join(set: (p)=>p.detalle)
-    ..where((d)=>d.pedido.id_pedido).equalTo(id);
+  @Operation.get('iddetped')
+  Future<Response> getDetallePedidoByID(@Bind.path('iddetped') int id) async {
+    final detpedidosQuery = Query<DetallePedido>(context)
+      ..join(object: (prod) => prod.producto)
+      ..join(object: (pedi) => pedi.pedido)
+        .join(object: (empl) => empl.empleado)
+      ..where((d) => d.pedido.id_pedido).equalTo(id);
     
     final detpedidos = await detpedidosQuery.fetch();
     return Response.ok(detpedidos);

@@ -15,8 +15,12 @@ class PedidosController extends ResourceController{
 
   @Operation.get('idpedido')
   Future<Response> getPedidoByID(@Bind.path('idpedido') int id) async{
-    final pedidosQuery = Query<Pedidos>(context)..where((a)=>a.id_pedido).equalTo(id);
-    final pedido = await pedidosQuery.fetch();
+    //final pedidosQuery = Query<Pedidos>(context)..where((a)=>a.id_pedido).equalTo(id);
+    final q = Query<Clientes>(context)
+      ..join(set: (c) => c.pedido)
+      ..where((a) => a.id_cliente).equalTo(id);
+
+    final pedido = await q.fetch();
 
     if( pedido == null ){
       return Response.notFound();
